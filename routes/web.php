@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LendingController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::get('/', [PostController::class, 'index']);
 Route::get('/category', [CategoryController::class, 'index']);
 Route::post('/store', [CategoryController::class, 'store']);
 Route::get('/category/{id}', [CategoryController::class, 'destroy']);
+
+//user
+Route::get('/user', [UserController::class, 'index']);
 
 
 Route::get('/post', [PostController::class, 'index']);
