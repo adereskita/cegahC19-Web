@@ -4,7 +4,7 @@
 
     <section class="top-70">
         <div class="container">
-            <h3 class="mb-4">Data Laporan</h3>
+            <h3 class="mb-4">Data Laporan Anda</h3>
             <div class="card shadow">
                 <div class="card-header py-3">
                     <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -24,10 +24,11 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
-                                    <th>Title</th>
-                                    <th>Body</th>
-                                    <th>Action</th>
+                                    <th>No.</th>
+                                    <th>Tanggal</th>
+                                    <th>Provinsi</th>
+                                    <th>Gejala</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,14 +36,24 @@
                                         <td>
                                         </td>
                                         <td>
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-info btn-sm">Update</button>
-                                                <a href=""><button type="button"
-                                                        class="btn btn-danger btn-sm">Delete</button></a>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <div class="" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-warning btn-sm c-white">
+                                                Update
+                                                </button>
+                                                <a href="">
+                                                    <button type="button" class="btn btn-danger btn-sm">
+                                                    Delete
+                                                    </button>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -79,23 +90,40 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Kebangsaan</label>
-                            <input class="form-control" rows="10" name="negara"/>
-                        </div>
-                        <div class="form-group">
                             <label>No. Identitas</label>
-                            <input class="form-control" rows="10" name="nik" placeholder="16 digit"/>
+                            <input class="form-control" maxlength="16" name="nik" placeholder="16 digit"/>
                         </div>
                         <div class="form-group">
                             <label>No. HP</label>
                             <input class="form-control" rows="10" name="umur"/>
                         </div>
                         <div class="form-group">
+                            <label>Provinsi</label>
+                            <select id="provinsi" class="form-control" rows="10" name="provinsi"> 
+                            <option value="">-Pilih Provinsi-</option>
+                                @foreach ($provinces as $id => $name)
+                                    <option value="{{ $id }}">{{ $name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div id="kota" class="form-group" style="display: none;">
+                            <label>Kota</label>
+                            <select name="kota" id="city" class="form-control">
+                                <option value="">-Pilih Kabupaten-</option>
+                            </select>                        
+                        </div>
+                        <div id="kecamatan" class="form-group" style="display: none;">
+                            <label>Kecamatan</label>
+                            <select name="kelurahan" id="village" class="form-control">
+                                <option value="">-Pilih Kelurahan -</option>
+                            </select>                        
+                        </div>
+                        <div class="form-group">
                             <label>Alamat</label>
                             <input class="form-control" rows="10" name="alamat"/>
                         </div>
                         <div class="form-group">
-                            <label >Keluhan</label><br>
+                            <label style="font-weight: bold;">Keluhan: </label><br>
                             <div style="vertical-align:middle">
                                 <label style="vertical-align:middle" for="male">Demam</label>
                                 <input type="checkbox" id="demam" name="demam" value="demam">
@@ -140,10 +168,10 @@
                                 <input type="checkbox" id="kulitRuam" name="kulitRuam" value="kulit ruam merah">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>Image</label>
                             <input type="file" class="form-control-file" name="image" />
-                        </div>
+                        </div> -->
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
@@ -153,5 +181,27 @@
             </div>
         </div>
     </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+
+    <script>
+    $(document).ready(function(){
+
+        $('#provinsi').on('change', function () {
+            $('#kota').show();
+            axios.post('{{route('provinsi.city')}}', {id: $(this).val()})
+            .then(function (response) {
+                $('#city').empty();
+
+                $.each(response.data, function (id, name) {
+                    $('#city').append(new Option(name, id));
+                    $('#village').append(new Option(name, id));
+                })
+            });
+        });
+    });
+    </script>
 
 @endsection

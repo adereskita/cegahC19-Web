@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Laravolt\Indonesia\Models\Province;
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\District;
+
+
+
+
 
 class UserController extends Controller
 {
@@ -12,7 +19,27 @@ class UserController extends Controller
     {
         // $posts = Post::all();
         // $categories = Category::get();
-        return view('user.user_dashboard');
+        $provinces = Province::pluck('name', 'id');
+
+        return view('user.user_dashboard', [
+            'provinces' => $provinces,
+        ]);
+    }
+
+    public function city(Request $request)
+    {
+        $cities = City::where('province_id', $request->get('id'))
+            ->pluck('name', 'id');
+    
+        return response()->json($cities);
+    }
+
+    public function district(Request $request)
+    {
+        $villages = Province::where('id', $request->get('id'))
+            ->pluck('name', 'id');
+    
+        return print_r($request);
     }
 
     // public function store(Request $request)

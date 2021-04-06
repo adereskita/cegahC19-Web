@@ -28,6 +28,9 @@ Route::get('/category/{id}', [CategoryController::class, 'destroy']);
 
 //user
 Route::get('/user', [UserController::class, 'index']);
+Route::post('/user', [UserController::class, 'city',])->name('provinsi.city');
+Route::post('/users', [UserController::class, 'district'])->name('district');
+// Route::post('/user/province', 'UserController@city')->name('provinsi.city');
 
 
 Route::get('/post', [PostController::class, 'index']);
