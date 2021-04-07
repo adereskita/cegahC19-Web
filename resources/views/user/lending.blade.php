@@ -1,6 +1,5 @@
-@extends('user.master_lending')
+@extends('layouts.app')
 
-<section class="section-one top-70"></section>
 
 @section('content')
 

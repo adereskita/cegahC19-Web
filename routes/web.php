@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LendingController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -20,7 +21,7 @@ use App\Http\Controllers\UserController;
 // Route::get('/', function () {
 //     return view('admin.dashboard');
 // });
-Route::get('/', [PostController::class, 'index']);
+Route::get('/admin', [PostController::class, 'index']);
 
 Route::get('/category', [CategoryController::class, 'index']);
 Route::post('/store', [CategoryController::class, 'store']);
@@ -39,4 +40,8 @@ Route::get('/post/destroy/{id}', [PostController::class, 'destroy']);
 
 Route::get('/lending', [LendingController::class, 'index']);
 Route::get('/lending/show/{posts}', [LendingController::class, 'show']);
-Route::get('/lending/login', [LendingController::class, 'login']);
+
+Auth::routes();
+
+
+Route::get('/', [LendingController::class, 'index'])->name('home');

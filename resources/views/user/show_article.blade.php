@@ -1,8 +1,8 @@
-@extends('user.master_lending')
+@extends('layouts.app')
 
 @section('content')
 
-    <section class="top-70">
+    <section class="mt-2">
         <div class="container">
             <div class="row">
                 <div class="col-md-7">

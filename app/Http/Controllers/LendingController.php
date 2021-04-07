@@ -17,9 +17,4 @@ class LendingController extends Controller
     {
         return view('user.show_article', compact('posts'));
     }
-
-    public function login()
-    {
-        return view('user.login');
-    }
 }
