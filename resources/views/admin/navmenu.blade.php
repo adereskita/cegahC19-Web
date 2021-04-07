@@ -4,7 +4,7 @@
                 navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
             </ul>
@@ -19,7 +19,7 @@
     <ul class="nav flex-column pt-2">
         <li class="nav-item"><a class="nav-link c-white" href="/post">Dashboard</a></li>
         <li class="nav-item"><a class="nav-link c-white" href="category">Category</a></li>
-        <li class="nav-item"><a class="nav-link c-white" href="#">User</a></li>
+        <li class="nav-item"><a class="nav-link c-white" href="/user">User</a></li>
         <li class="nav-item"><a class="nav-link c-white" href="/lending">Go to website</a></li>
         <li class="nav-item"><a class="nav-link c-white" href="#">Logout</a></li>
     </ul>
