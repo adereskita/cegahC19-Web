@@ -33,6 +33,8 @@ Route::post('/user', [UserController::class, 'city',])->name('provinsi.city');
 Route::post('/users', [UserController::class, 'district'])->name('district');
 // Route::post('/user/province', 'UserController@city')->name('provinsi.city');
 
+Route::post('/user/submiting', [UserController::class, 'input']);
+
 
 Route::get('/post', [PostController::class, 'index']);
 Route::post('/post/store', [PostController::class, 'store']);
@@ -41,7 +43,6 @@ Route::get('/post/destroy/{id}', [PostController::class, 'destroy']);
 Route::get('/lending', [LendingController::class, 'index']);
 Route::get('/lending/show/{posts}', [LendingController::class, 'show']);
 
-Auth::routes();
-
+// Auth::routes();
 
 Route::get('/', [LendingController::class, 'index'])->name('home');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use App\Models\userCovid;
 use Illuminate\Http\Request;
 use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\City;
@@ -19,10 +20,13 @@ class UserController extends Controller
     {
         // $posts = Post::all();
         // $categories = Category::get();
+        $user = userCovid::all();
+
         $provinces = Province::pluck('name', 'id');
 
         return view('user.user_dashboard', [
             'provinces' => $provinces,
+            'user' => $user,
         ]);
     }
 
@@ -40,6 +44,33 @@ class UserController extends Controller
             ->pluck('name', 'id');
     
         return print_r($request);
+    }
+
+    public function input(Request $req)
+    {
+        $provinsi = Province::where('id', $req->input('provinsi'))->value('name');
+        $kota = City::where('id', $req->input('kota'))->value('name');
+
+        $checkbox=$req->input('gejala');  
+        $chk="";  
+        foreach($checkbox as $chk1)  
+        {  
+            $chk .= $chk1.",";
+        } 
+
+        // $value = $req->all();
+        userCovid::create([
+            'nama'=> request('nama'),
+            'umur'=> request('umur'),
+            'gender'=> request('gender'),
+            'nik'=> request('nik'),
+            'telepon'=> request('telepon'),
+            'provinsi'=> $provinsi,
+            'kota'=> $kota,
+            'alamat'=> request('alamat'),
+            'gejala'=> $chk
+        ]);
+        return redirect('/user');
     }
 
     // public function store(Request $request)
