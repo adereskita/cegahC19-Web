@@ -43,6 +43,6 @@ Route::get('/post/destroy/{id}', [PostController::class, 'destroy']);
 Route::get('/lending', [LendingController::class, 'index']);
 Route::get('/lending/show/{posts}', [LendingController::class, 'show']);
 
-// Auth::routes();
+Auth::routes();
 
 Route::get('/', [LendingController::class, 'index'])->name('home');
