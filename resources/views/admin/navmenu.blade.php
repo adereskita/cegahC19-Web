@@ -4,9 +4,8 @@
                 navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/post">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/logout">Logout</a></li>
             </ul>
         </div>
     </div>
