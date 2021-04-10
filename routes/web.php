@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LendingController;
@@ -17,10 +18,15 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => 'checkadmin'], function () {
 
-// Route::get('/', function () {
-//     return view('admin.dashboard');
-// });
+});
+
+Route::group(['middleware' => 'checkuser'], function () {
+
+});
+
+
 Route::get('/admin', [PostController::class, 'index']);
 
 Route::get('/category', [CategoryController::class, 'index']);
@@ -43,6 +49,12 @@ Route::get('/post/destroy/{id}', [PostController::class, 'destroy']);
 Route::get('/lending', [LendingController::class, 'index']);
 Route::get('/lending/show/{posts}', [LendingController::class, 'show']);
 
-Auth::routes();
-
 Route::get('/', [LendingController::class, 'index'])->name('home');
+
+Auth::routes();
+Route::get('admin/login', [AdminController::class, 'login']);
+Route::post('admin/loging', [AdminController::class, 'loging']);
+Route::get('admin/logout', [AdminController::class, 'logout']);
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
