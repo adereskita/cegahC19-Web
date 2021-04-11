@@ -47,35 +47,31 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
+                        @if (session('login') == false)
+
                                 <li class="nav-item">
                                     <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
                                     <a class="nav-link" href="/user/login">{{ __('Login') }}</a>
                                 </li>
-                            @endif
-
-                            @if (Route::has('register'))
                                 <li class="nav-item">
                                     <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> -->
                                     <a class="nav-link" href="/user/register">{{ __('Register') }}</a>
                                 </li>
-                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ session('name') }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/user">Profile</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <a class="dropdown-item" href="/user/logout" onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Logout
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="/user/logout" method="POST" class="d-none">
                                         @csrf
                                     </form>
 
