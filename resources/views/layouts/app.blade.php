@@ -49,14 +49,14 @@
                         <!-- Authentication Links -->
                         @if (session('login') == false)
 
-                                <li class="nav-item">
-                                    <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
-                                    <a class="nav-link" href="/user/login">{{ __('Login') }}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> -->
-                                    <a class="nav-link" href="/user/register">{{ __('Register') }}</a>
-                                </li>
+                            <li class="nav-item">
+                                <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+                                <a class="nav-link" href="/user/login">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> -->
+                                <a class="nav-link" href="/user/register">{{ __('Register') }}</a>
+                            </li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -78,20 +78,24 @@
                                 </div>
                             </li>
                         @endguest
-                    </ul>
-                </div>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main>
+        @yield('content')
+    </main>
+
+    @include('user.footer')
+
+</div>
 
 
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/script.js') }}"></script>
+
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 
 </html>

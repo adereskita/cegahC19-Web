@@ -5,7 +5,7 @@
 }
 
 body {
-  background: #F7F7F7;
+  background: #FFFFFF;
   font-family: Nunito, sans-serif;
 }
 
@@ -47,7 +47,7 @@ body {
 }
 
 .section-one {
-  height: 350px;
+  height: 300px;
 }
 
 .img-artikel {
@@ -100,4 +100,12 @@ footer {
   width: 70px;
   height: 70px;
 }
+
+.bg-blue-one{
+    background: linear-gradient(360deg, #1E3C72 0%, #2A5298 100%);
+}
+.bg-blue-two{
+    background: #113069;
+}
+
 
