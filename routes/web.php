@@ -19,30 +19,41 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::group(['middleware' => 'checkadmin'], function () {
-
+    Route::get('/admin', [PostController::class, 'index']);
 });
 
 Route::group(['middleware' => 'checkuser'], function () {
-
+    Route::get('/user', [UserController::class, 'index']);
 });
 
 
-Route::get('/admin', [PostController::class, 'index']);
-
+// Route::get('/admin', [PostController::class, 'index']);
+//admin
 Route::get('/category', [CategoryController::class, 'index']);
 Route::post('/store', [CategoryController::class, 'store']);
 Route::get('/category/{id}', [CategoryController::class, 'destroy']);
 
+Route::get('/admin/search', [AdminController::class, 'search']);
+Route::get('/admin/delete/{id}', [UserController::class, 'deleteRow']);
+
+
 //user
-Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/login', [UserController::class, 'login']);
+Route::post('/user/loging', [UserController::class, 'loging']);
+Route::post('/user/logout', [UserController::class, 'logout']);
+
+Route::get('/user/register', [UserController::class, 'register']);
+Route::get('/user/registering', [UserController::class, 'registering']);
+
 Route::post('/user', [UserController::class, 'city',])->name('provinsi.city');
 Route::post('/users', [UserController::class, 'district'])->name('district');
 // Route::post('/user/province', 'UserController@city')->name('provinsi.city');
 
 Route::post('/user/submiting', [UserController::class, 'input']);
+Route::get('/user/delete/{id}', [UserController::class, 'deleteRow']);
 
 
-Route::get('/post', [PostController::class, 'index']);
+// Route::get('/post', [PostController::class, 'index']);
 Route::post('/post/store', [PostController::class, 'store']);
 Route::get('/post/destroy/{id}', [PostController::class, 'destroy']);
 
