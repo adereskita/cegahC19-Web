@@ -19,4 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/post', [PostApiController::class, 'index']);
+Route::get('/posts', [PostApiController::class, 'index']);
+Route::get('/post/{id}', [PostApiController::class, 'show']);
+Route::get('/post/destroy/{id}', [PostApiController::class, 'destroy']);
+Route::post('/post/store', [PostApiController::class, 'store']);
+Route::post('/post/update/{id}', [PostApiController::class, 'update']);
