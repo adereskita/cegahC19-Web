@@ -57,6 +57,78 @@
         </div>
     </section>
 
+    <section class="top-70">
+        <div class="container">
+            <h3 class="mb-4">Data Laporan</h3>
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <div class="text-md-right dataTables_filter">
+                                <form action="/admin/search" method="GET">
+                                    <label>
+                                        <input class="form-control form-control-sm" type="text" name="search"
+                                                placeholder="Search" value="{{old('search')}}">
+                                    </label>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr style="text-transform: capitalize;">
+                                    <th>No.</th>
+                                    <th>Nama</th>
+                                    <th>Tanggal</th>
+                                    <th>Provinsi</th>
+                                    <th>Gejala</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($user as $users => $value)
+                                <tr style="text-transform: capitalize;">
+                                    <td>{{$users +1}}</td>
+                                    <td>
+                                    {{$value->nama}}
+                                    </td>
+                                    <td>
+                                    {{$value->created_at}}
+                                    </td>
+                                    <td>
+                                    {{$value->provinsi}}
+                                    </td>
+                                    <td>
+                                    {{$value->gejala}}
+                                    </td>
+                                    <td>
+                                            <a href="/admin/delete/{{$value->id}}">
+                                                <button type="button" class="btn btn-danger btn-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+</svg>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br/>
+                Halaman : {{ $user->currentPage() }} <br/>
+                <div class="mt-1">
+                    {{$user->links('pagination::bootstrap-4')}}
+                </div>
+        </div>
+    </section>
+
     <div role="dialog" tabindex="-1" class="modal fade" id="modalPost">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

@@ -12,13 +12,6 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col"></div>
-                        <div class="col">
-                            <div class="text-md-right dataTables_filter">
-                                <form><label><input class="form-control form-control-sm" type="text"
-                                            placeholder="Search"></label></form>
-                            </div>
-                        </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table">
@@ -49,6 +42,9 @@
                                     {{$value->gejala}}
                                     </td>
                                     <td>
+                                    <a href="">
+                                    
+                                    </a>
                                         <div class="" role="group" aria-label="Basic example">
                                             <button type="button" class="btn btn-info btn-sm c-white">
                                             <svg width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -56,7 +52,7 @@
   <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
 </svg>
                                             </button>
-                                            <a href="">
+                                            <a href="/user/delete/{{$value->id}}">
                                                 <button type="button" class="btn btn-danger btn-sm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -73,6 +69,11 @@
                     </div>
                 </div>
             </div>
+            <br/>
+                Halaman : {{ $user->currentPage() }} <br/>
+                <div class="mt-1">
+                    {{$user->links('pagination::bootstrap-4')}}
+                </div>
         </div>
     </section>
 

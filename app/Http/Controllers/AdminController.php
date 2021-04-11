@@ -8,11 +8,10 @@ use App\Models\userCovid;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Laravolt\Indonesia\Models\Province;
-use Laravolt\Indonesia\Models\City;
-use Laravolt\Indonesia\Models\District;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-
+use App\Models\Category;
+use App\Models\Post;
 
 
 class AdminController extends Controller
@@ -32,8 +31,9 @@ class AdminController extends Controller
             if(Hash::check($password,$data->password)){
                 Session::put('name',$data->name);
                 Session::put('email',$data->email);
-                Session::put('login',TRUE);
-                return redirect('/post');
+                // Session::put('login',TRUE);
+                session(['login' => TRUE]);
+                return redirect('/admin');
             }
             else{
                 return redirect()->back()->with('error','The password or email is wrong.');
@@ -49,14 +49,6 @@ class AdminController extends Controller
         return redirect('/');
     }
 
-    public function city(Request $request)
-    {
-        $cities = City::where('province_id', $request->get('id'))
-            ->pluck('name', 'id');
-    
-        return response()->json($cities);
-    }
-
     public function district(Request $request)
     {
         $villages = Province::where('id', $request->get('id'))
@@ -65,46 +57,31 @@ class AdminController extends Controller
         return print_r($request);
     }
 
-    public function input(Request $req)
+    public function search(Request $req)
     {
-        $provinsi = Province::where('id', $req->input('provinsi'))->value('name');
-        $kota = City::where('id', $req->input('kota'))->value('name');
+        $search = $req->search;
+        
+        //sortable is 3rd party method from columnsortable
+        // foreach ($user as $key => $attribute) {
+            $user = userCovid::sortable()->where('nama', 'like', '%'.$search.'%')
+            ->orderby('created_at', 'desc')
+            ->paginate();
 
-        $checkbox=$req->input('gejala');  
-        $chk="";  
-        foreach($checkbox as $chk1)  
-        {  
-            $chk .= $chk1.",";
-        } 
+            $posts = Post::all();
+            $categories = Category::get();
 
-        // $value = $req->all();
-        userCovid::create([
-            'nama'=> request('nama'),
-            'umur'=> request('umur'),
-            'gender'=> request('gender'),
-            'nik'=> request('nik'),
-            'telepon'=> request('telepon'),
-            'provinsi'=> $provinsi,
-            'kota'=> $kota,
-            'alamat'=> request('alamat'),
-            'gejala'=> $chk
-        ]);
-        return redirect('/user');
+            $provinces = Province::pluck('name', 'id');
+            return view('admin.dashboard', [
+                'provinces' => $provinces,
+                'user' => $user,
+                'posts' => $posts,
+                'categories' => $categories
+            ]);
     }
 
-    // public function store(Request $request)
-    // {
-        // $attr = $request->all();
-        // $images = request()->file('image')->store("images");
-        // $attr['image'] = $images;
-        // Post::create($attr);
-        // return back();
-    // }
-
-    // public function destroy(Post $id)
-    // {
-    //     Storage::delete($id->image);
-    //     $id->delete();
-    //     return back();
-    // }
+    public function deleteRow($id)
+    {
+        userCovid::where('id', $id)->delete();
+        return redirect('/admin');
+    }
 }

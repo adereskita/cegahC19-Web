@@ -8,7 +8,14 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                @if (session()->has('error'))
+                        <div class="uk-alert-danger" uk-alert>
+                            <a class="uk-alert-close" uk-close></a>
+                                <p>{{ session()->get('error') }}</p>
+                        </div>
+                @endif
+
+                    <form method="POST" action="/user/loging">
                         @csrf
 
                         <div class="form-group row">
