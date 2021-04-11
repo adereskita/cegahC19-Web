@@ -43,7 +43,7 @@ Route::post('/user/loging', [UserController::class, 'loging']);
 Route::post('/user/logout', [UserController::class, 'logout']);
 
 Route::get('/user/register', [UserController::class, 'register']);
-Route::get('/user/registering', [UserController::class, 'registering']);
+Route::post('/user/registering', [UserController::class, 'registering']);
 
 Route::post('/user', [UserController::class, 'city',])->name('provinsi.city');
 Route::post('/users', [UserController::class, 'district'])->name('district');

@@ -11,9 +11,18 @@ use Illuminate\Http\Request;
 use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\District;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Providers\RouteServiceProvider;
 
 class UserController extends Controller
 {
+    use AuthenticatesUsers;
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
     public function index(Request $req)
     {
         $usermail = $req->session()->get('email');
@@ -32,7 +41,7 @@ class UserController extends Controller
 
     public function register()
     {
-        return view('user.register');
+        return view('auth.register');
     }
 
     public function registering(Request $request)
@@ -44,11 +53,26 @@ class UserController extends Controller
         ]);
 
         $name = $request->input('name');
+        $email = $request->input('email');
+        $password = $request->input('password');
+        
         $regist = new User;
-        $regist->name = $request->input('name');
-        $regist->email = $request->input('email');
+        $regist->name = $name;
+        $regist->email = $email;
         $regist->password = Hash::make($request->input('password'));
         $regist->save();
+
+        $data = User::where('email',$request->input('email'))->first();
+
+        if($data != null){ //apakah email tersebut ada atau tidak
+            if(Hash::check($password,$data->password)){
+                Session::put('name',$data->name);
+                Session::put('email',$data->email);
+                // Session::put('login',TRUE);
+                session(['login' => TRUE]);
+                return redirect('/');
+            }
+        }
     }
 
     public function login()
@@ -68,7 +92,7 @@ class UserController extends Controller
                 Session::put('email',$data->email);
                 // Session::put('login',TRUE);
                 session(['login' => TRUE]);
-                return redirect('/user');
+                return redirect('/');
             }
             else{
                 return redirect()->back()->with('error','The password or email is wrong.');
