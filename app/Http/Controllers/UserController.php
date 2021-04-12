@@ -12,7 +12,7 @@ use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\District;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
