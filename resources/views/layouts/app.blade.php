@@ -34,13 +34,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Beranda</a>
+                            <a class="nav-link" aria-current="page" href="/">Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="#">Artikel</a>
+                            <a class="nav-link " aria-current="page" href="/artikel">Artikel</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="#">Kontak</a>
+                            <a class="nav-link " aria-current="page" href="/#kontak">Kontak</a>
                         </li>
                     </ul>
 
@@ -77,7 +77,7 @@
 
                                 </div>
                             </li>
-                        @endguest
+                        @endif
                 </ul>
             </div>
         </div>
@@ -87,7 +87,7 @@
         @yield('content')
     </main>
 
-    @include('user.footer')
+    <!-- @include('user.footer') -->
 
 </div>
 

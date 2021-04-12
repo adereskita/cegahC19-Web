@@ -21,22 +21,43 @@ use App\Http\Controllers\UserController;
 
 Route::group(['middleware' => 'checkadmin'], function () {
     Route::get('/admin', [PostController::class, 'index']);
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::get('/admin/search', [AdminController::class, 'search']);
+    Route::get('/admin/delete/{id}', [UserController::class, 'deleteRow']);
 });
 
 Route::group(['middleware' => 'checkuser'], function () {
     Route::get('/user', [UserController::class, 'index']);
+    Route::post('/user', [UserController::class, 'city',])->name('provinsi.city');
+    Route::post('/users', [UserController::class, 'district'])->name('district');
 });
 
 
-// Route::get('/admin', [PostController::class, 'index']);
-//admin
-Route::get('/category', [CategoryController::class, 'index']);
+//admin dashboard
 Route::post('/store', [CategoryController::class, 'store']);
 Route::get('/category/{id}', [CategoryController::class, 'destroy']);
 
-Route::get('/admin/search', [AdminController::class, 'search']);
-Route::get('/admin/delete/{id}', [UserController::class, 'deleteRow']);
+//user
+Route::post('/user/submiting', [UserController::class, 'input']);
+Route::get('/user/delete/{id}', [UserController::class, 'deleteRow']);
 
+//admin post
+// Route::get('/post', [PostController::class, 'index']);
+Route::post('/post/store', [PostController::class, 'store']);
+Route::get('/post/destroy/{id}', [PostController::class, 'destroy']);
+
+Route::get('/lending', [LendingController::class, 'index']);
+Route::get('/lending/show/{posts}', [LendingController::class, 'show']);
+
+Route::get('/artikel', [LendingController::class, 'showAll']);
+
+Route::get('/', [LendingController::class, 'index'])->name('home');
+
+Auth::routes();
+//admin
+Route::get('admin/login', [AdminController::class, 'login']);
+Route::post('admin/loging', [AdminController::class, 'loging']);
+Route::get('admin/logout', [AdminController::class, 'logout']);
 
 //user
 Route::get('/user/login', [UserController::class, 'login']);
@@ -45,28 +66,5 @@ Route::post('/user/logout', [UserController::class, 'logout']);
 
 Route::get('/user/register', [UserController::class, 'register']);
 Route::post('/user/registering', [UserController::class, 'registering']);
-
-Route::post('/user', [UserController::class, 'city',])->name('provinsi.city');
-Route::post('/users', [UserController::class, 'district'])->name('district');
-// Route::post('/user/province', 'UserController@city')->name('provinsi.city');
-
-Route::post('/user/submiting', [UserController::class, 'input']);
-Route::get('/user/delete/{id}', [UserController::class, 'deleteRow']);
-
-
-// Route::get('/post', [PostController::class, 'index']);
-Route::post('/post/store', [PostController::class, 'store']);
-Route::get('/post/destroy/{id}', [PostController::class, 'destroy']);
-
-Route::get('/lending', [LendingController::class, 'index']);
-Route::get('/lending/show/{posts}', [LendingController::class, 'show']);
-
-Route::get('/', [LendingController::class, 'index'])->name('home');
-
-Auth::routes();
-Route::get('admin/login', [AdminController::class, 'login']);
-Route::post('admin/loging', [AdminController::class, 'loging']);
-Route::get('admin/logout', [AdminController::class, 'logout']);
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
