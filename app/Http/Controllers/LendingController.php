@@ -8,16 +8,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\User;
 use App\Models\userCovid;
+use Illuminate\Support\Facades\Http;
 
 class LendingController extends Controller
 {
     public function index()
     {
+
+        $covids = Http::get('https://api.kawalcorona.com/indonesia')->json();
+
+        foreach ($covids as $covid) {
+            $splitt = str_split($covid['positif']);
+        }
+        
         if (session()->get('email') == null) {
             $posts = Post::offset(0)->limit(3)->get();
             $date = Carbon::now()->translatedFormat('l, d F Y');
 
-            return view('user.lending', compact('posts','date'));
+            return view('user.lending', compact('posts','date','covids','splitt'));
         }
         // jika user ada, maka kode dibawah akan jalan
         $usermail = session()->get('email');
@@ -44,7 +52,7 @@ class LendingController extends Controller
         $posts = Post::whereIn('category_id', $ids)->limit(3)->get();
         $date = Carbon::now()->translatedFormat('l, d F Y');
 
-        return view('user.lending', compact('posts','date'));
+        return view('user.lending', compact('posts','date','covids'));
     }
 
     public function show(Post $posts)
