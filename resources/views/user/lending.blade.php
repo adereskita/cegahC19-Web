@@ -40,26 +40,30 @@
 
                     </div>
                 </div>
-                <a href="artikel/gejalaCovid">Pelajari lebih lanjut ></a>
+                <a class="text-dark" href="artikel/gejalaCovid"><u>Pelajari lebih lanjut></u></a>
             </div>
             <div class="col-md-4">
                     <!-- lanjutin ini cara dapatin image nya gimana -->
                 <h4 class="text-start fw-bolder">Cek Kesehatan Anda</h4>
                 <div class="d-flex justify-content-start">
-                    <div class="p-3">
-                        <img src="{{ asset('assets/img/Ellipse.png') }}">
-                        <p class="text-center">Lapor Gejala</p>
-                    </div>
-                    <div class="p-3">
-                        <img src="{{ asset('assets/img/Ellipse.png') }}">
-                        <p class="text-center">Kalkulator BMI</p>
-
-                    </div>
-                    <div class="p-3">
-                        <img src="{{ asset('assets/img/Ellipse.png') }}">
-                        <p class="text-center">Informasi Kesehatan</p>
-
-                    </div>
+                    <a class="text-dark" href="/user">
+                        <div class="p-3">
+                            <img src="{{ asset('assets/img/Ellipse.png') }}">
+                            <p class="text-center">Lapor Gejala</p>
+                        </div>
+                    </a>
+                    <a class="text-dark" href="/bmi">
+                        <div class="p-3">
+                            <img src="{{ asset('assets/img/Ellipse.png') }}">
+                            <p class="text-center">Kalkulator BMI</p>
+                        </div>
+                    </a>
+                    <a class="text-dark" href="/artikel">
+                        <div class="p-3">
+                            <img src="{{ asset('assets/img/Ellipse.png') }}">
+                            <p class="text-center">Informasi Kesehatan</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

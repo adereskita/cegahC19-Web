@@ -22,6 +22,15 @@
                 @endforeach
             </div>
         </div>
+        <br/>
+        <p class="text-center">
+        Halaman : {{ $posts->currentPage() }}
+        </p>
+        <div class="d-flex justify-content-center">
+                <div class="mt-1">
+                    {{$posts->links('pagination::bootstrap-4')}}
+                </div>
+        </div>
 </div>
 
     @include('user.footer')
