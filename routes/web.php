@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LendingController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BMIController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -50,6 +50,10 @@ Route::get('/lending', [LendingController::class, 'index']);
 Route::get('/lending/show/{posts}', [LendingController::class, 'show']);
 
 Route::get('/artikel', [LendingController::class, 'showAll']);
+
+Route::get('/bmi', [BMIController::class, 'index']);
+Route::post('/bmi/calculate', [BMIController::class, 'calculate']);
+
 
 Route::get('/', [LendingController::class, 'index'])->name('home');
 
