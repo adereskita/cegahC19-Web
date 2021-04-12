@@ -24,3 +24,4 @@ Route::get('/post/{id}', [PostApiController::class, 'show']);
 Route::get('/post/destroy/{id}', [PostApiController::class, 'destroy']);
 Route::post('/post/store', [PostApiController::class, 'store']);
 Route::post('/post/update/{id}', [PostApiController::class, 'update']);
+

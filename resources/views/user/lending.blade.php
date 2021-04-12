@@ -2,15 +2,80 @@
 
 
 @section('content')
+
+<style>
+#pic-1 {
+    background-color: #A7D7C5;
+    background-image: url("assets/img/fever.png");
+    background-size: 62px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+#pic-2 {
+    background-color: #A7D7C5;
+    background-image: url("assets/img/tired.png");
+    background-size: 62px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+#pic-3 {
+    background-color: #A7D7C5;
+    background-image: url("assets/img/cough.png");
+    background-size: 62px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+#pict-1 {
+    background-color: #A7D7C5;
+    background-image: url("assets/img/virus.png");
+    background-size: 52px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#pict-2 {
+    background-color: #A7D7C5;
+    background-image: url("assets/img/scale.png");
+    background-size: 48px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#pict-3 {
+    background-color: #A7D7C5;
+    background-image: url("assets/img/medical-report.png");
+    background-size: 56px;
+    background-position: right;
+    background-repeat: no-repeat;
+}
+</style>
+
     <div class="container">
         <div class="section-one p-5">
-            <h1>Kasus Covid Indonesia</h1>
-            <!-- <p>Hari ini, Kamis 2 Januari 2021</p> -->
+            <h1>Jumlah Kasus Covid Indonesia</h1>
             <p>Hari {{$date}}</p>
+
+            <div class="d-flex justify-content-start">
+            <!-- foreach ($splitt as $splits)
+            <div class="card shadow px-2 pt-2 mb-5 mt-3 bg-white rounded mx-3">
+                    <h5 class="text-center font-weight-bold">$splits</h5>
+            </div>
+            <p>$covid['positif']</p>
+            endforeach -->
+            @foreach ($covids as $covid)
+
+            <h1 class="text-center font-weight-bold text-info" style="font-size: 42pt;">{{$covid['positif']}}</h1>
+            @endforeach
+
+                <div class="float-right d-flex" style="margin-left: 350px; margin-top:50px">
+                    <img class="img-fluid" src="{{asset('assets/img/human_home.svg')}}">
+                </div>
+            </div>
         </div>
-        
+        <h4 class="mt-2 ml-5 d-flex">Siap Tanggapi Wabah Covid-19</h4>
+
         <!-- lanjutin ini cara dapatin image nya gimana -->
-        <img class="uk-margin-remove-right" src="{{url('img/virus.png')}}" width=30 height=30 alt="" uk-svg>
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 290">
             <path fill="#e7008a" fill-opacity="1"
@@ -26,16 +91,22 @@
                 <h4 class="text-start fw-bolder">Gejala Umum Covid</h4>
                 <div class="d-flex justify-content-start">
                 <div class="p-3">
-                        <img src="{{ asset('assets/img/Ellipse.png') }}">
+                    <div class="card rounded-circle shadow" id="pic-1" style="width: 72px; height:72px;">
+                        <!-- <img class="text-center" src="{{ asset('assets/img/fever.png') }}" style=""> -->
+                    </div>
                         <p class="text-center">Demam</p>
                     </div>
                     <div class="p-3">
-                        <img src="{{ asset('assets/img/Ellipse.png') }}">
+                        <div class="card rounded-circle shadow" id="pic-2" style="width: 72px; height:72px;">
+                        </div>
+                        <!-- <img src="{{ asset('assets/img/Ellipse.png') }}"> -->
                         <p class="text-center">Kelelahan</p>
 
                     </div>
                     <div class="p-3">
-                        <img src="{{ asset('assets/img/Ellipse.png') }}">
+                        <div class="card rounded-circle shadow" id="pic-3" style="width: 72px; height:72px;">
+                        </div>
+                        <!-- <img src="{{ asset('assets/img/Ellipse.png') }}"> -->
                         <p class="text-center">Batuk Kering</p>
 
                     </div>
@@ -48,19 +119,25 @@
                 <div class="d-flex justify-content-start">
                     <a class="text-dark" href="/user">
                         <div class="p-3">
-                            <img src="{{ asset('assets/img/Ellipse.png') }}">
+                            <!-- <img src="{{ asset('assets/img/Ellipse.png') }}"> -->
+                            <div class="card rounded-circle shadow" id="pict-1" style="width: 72px; height:72px;">
+                            </div>
                             <p class="text-center">Lapor Gejala</p>
                         </div>
                     </a>
                     <a class="text-dark" href="/bmi">
                         <div class="p-3">
-                            <img src="{{ asset('assets/img/Ellipse.png') }}">
+                            <!-- <img src="{{ asset('assets/img/Ellipse.png') }}"> -->
+                            <div class="card rounded-circle shadow" id="pict-2" style="width: 72px; height:72px;">
+                            </div>
                             <p class="text-center">Kalkulator BMI</p>
                         </div>
                     </a>
                     <a class="text-dark" href="/artikel">
                         <div class="p-3">
-                            <img src="{{ asset('assets/img/Ellipse.png') }}">
+                            <!-- <img src="{{ asset('assets/img/Ellipse.png') }}"> -->
+                            <div class="card rounded-circle shadow" id="pict-3" style="width: 72px; height:72px;">
+                            </div>
                             <p class="text-center">Informasi Kesehatan</p>
                         </div>
                     </a>
