@@ -14,7 +14,7 @@
     <section class="mt-3">
         <div class="container">
             <div class="card shadow">
-                <div class="card-header" style="select:selectable">
+                <div class="card-header">
                 <h3 class="">BMI Kalkulator</h3>
                     <!-- <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#modalPost">Tambah</button> -->
@@ -63,8 +63,8 @@
                     <div class="d-flex justify-content-center">
                     <h2>Hasil IBM</h2>
                     </div>
-                    <h2 class="d-flex justify-content-center font-weight-bold">{{round($bmi, 1)}}</h2>
-                    <h2 class="d-flex justify-content-center">{{$output}}</h2>
+                    <h2 class="d-flex justify-content-center font-weight-bold">{{round($bmi ?? '', 1)}}</h2>
+                    <h2 class="d-flex justify-content-center">{{$output ?? ''}}</h2>
                 </div>
             </div>
         </div>
