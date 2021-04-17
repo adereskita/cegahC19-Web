@@ -9,10 +9,9 @@
 
                 <div class="card-body">
                 @if (session()->has('error'))
-                        <div class="uk-alert-danger" uk-alert>
-                            <a class="uk-alert-close" uk-close></a>
-                                <p>{{ session()->get('error') }}</p>
-                        </div>
+                    <div class="alert alert-warning" role="alert">
+                        {{ session()->get('error') }}
+                    </div>
                 @endif
                     <form method="POST" action="/user/registering">
                         @csrf

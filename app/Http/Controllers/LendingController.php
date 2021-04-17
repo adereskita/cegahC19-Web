@@ -17,7 +17,7 @@ class LendingController extends Controller
 
         $covids = Http::get('https://api.kawalcorona.com/indonesia')->json();
 
-        foreach ($covids as $covid) {
+        foreach ($covids as $covid) { //untuk tampilan per card per angka.
             $splitt = str_split($covid['positif']);
         }
         
@@ -35,28 +35,33 @@ class LendingController extends Controller
         }
         //get gejala id
         $dataGejala = userCovid::where('id_user', $id)->get('gejala')->first();
+        
         if ($dataGejala == null) {
             $posts = Post::offset(0)->limit(3)->get();
             $date = Carbon::now()->translatedFormat('l, d F Y');
 
-        } else {
-            $gejala = userCovid::where('id_user', $id)->get('gejala');
-            foreach ($gejala as $key => $attribute) {
-                $gejala_nama = $attribute->gejala; //get the category id
-                $gejalas[] = $gejala_nama;
-            }
-    
-            $vals = implode(',',$gejalas); // set as comma separated value
-            $valArrs = explode(',',$vals); // set as array from separated value
-            $category = Category::whereIn('title', $valArrs)->get('id');
-            foreach ($category as $key => $attribute) {
-                $cat_id = $attribute->id; //get the category id
-                $ids[] = $cat_id;
-            }
-    
-            $posts = Post::whereIn('category_id', $ids)->limit(3)->get();
-            $date = Carbon::now()->translatedFormat('l, d F Y');    
+            return view('user.lending', compact('posts','date','covids'));
+
         }
+
+        $gejala = userCovid::where('id_user', $id)->get('gejala');
+        foreach ($gejala as $key => $attribute) {
+            $gejala_nama = $attribute->gejala; //get the category id
+            $gejalas[] = $gejala_nama;
+        }
+    
+        $vals = implode(',',$gejalas); // set as comma separated value
+        $valArrs = explode(',',$vals); // set as array from separated value
+
+        $category = Category::whereIn('title', $valArrs)->get('id');
+        foreach ($category as $key => $attribute) {
+            $cat_id = $attribute->id; //get the category id
+            $ids[] = $cat_id;
+        }
+    
+        $posts = Post::whereIn('category_id', $ids)->limit(3)->get();
+        $date = Carbon::now()->translatedFormat('l, d F Y');    
+
         return view('user.lending', compact('posts','date','covids'));
     }
 
