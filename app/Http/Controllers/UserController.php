@@ -55,23 +55,26 @@ class UserController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
         $password = $request->input('password');
-        
-        $regist = new User;
-        $regist->name = $name;
-        $regist->email = $email;
-        $regist->password = Hash::make($request->input('password'));
-        $regist->save();
 
         $data = User::where('email',$request->input('email'))->first();
 
-        if($data != null){ //apakah email tersebut ada atau tidak
+        if($data == null){ //apakah email tersebut ada atau tidak
             if(Hash::check($password,$data->password)){
+
+                $regist = new User;
+                $regist->name = $name;
+                $regist->email = $email;
+                $regist->password = Hash::make($request->input('password'));
+                $regist->save();
+
                 Session::put('name',$data->name);
                 Session::put('email',$data->email);
                 // Session::put('login',TRUE);
                 session(['login' => TRUE]);
                 return redirect('/');
             }
+        } else {
+            return redirect()->back()->with('error','The email is already used.');
         }
     }
 
