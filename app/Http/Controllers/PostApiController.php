@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
+use App\Models\userCovid;
 use Illuminate\Http\Request;
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\Province;
 
 class PostApiController extends Controller
 {
@@ -49,6 +53,40 @@ class PostApiController extends Controller
         return response()->json([
             'status' => 'data berhasil diubah.',
             'data' => $post
+        ]);
+    }
+
+    public function users()
+    {
+        $users = User::all();
+        return response()->json([
+            'status' => 'oke',
+            'data' => $users
+        ]);
+    }
+    public function covData()
+    {
+        $covData = userCovid::all();
+        return response()->json([
+            'status' => 'oke',
+            'data' => $covData
+        ]);
+    }
+
+    public function provinces()
+    {
+        $province = Province::all();
+        return response()->json([
+            'status' => 'oke',
+            'data' => $province
+        ]);
+    }
+    public function cities()
+    {
+        $city = City::all();
+        return response()->json([
+            'status' => 'oke',
+            'data' => $city
         ]);
     }
 }

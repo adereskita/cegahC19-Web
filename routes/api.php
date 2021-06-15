@@ -25,3 +25,10 @@ Route::get('/post/destroy/{id}', [PostApiController::class, 'destroy']);
 Route::post('/post/store', [PostApiController::class, 'store']);
 Route::post('/post/update/{id}', [PostApiController::class, 'update']);
 
+Route::get('/users', [PostApiController::class, 'users']);
+Route::get('/covids', [PostApiController::class, 'covData']);
+
+Route::get('/province', [PostApiController::class, 'provinces']);
+Route::get('/city', [PostApiController::class, 'cities']);
+
+
