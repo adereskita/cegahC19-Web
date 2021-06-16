@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostApiController;
+use App\Http\Controllers\UserApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,10 +26,25 @@ Route::get('/post/destroy/{id}', [PostApiController::class, 'destroy']);
 Route::post('/post/store', [PostApiController::class, 'store']);
 Route::post('/post/update/{id}', [PostApiController::class, 'update']);
 
-Route::get('/users', [PostApiController::class, 'users']);
-Route::get('/covids', [PostApiController::class, 'covData']);
-
 Route::get('/province', [PostApiController::class, 'provinces']);
 Route::get('/city', [PostApiController::class, 'cities']);
 
+Route::get('/users', [UserApiController::class, 'users']);
+Route::get('/covids', [UserApiController::class, 'covData']);
+// Route::post('/login', [PostApiController::class, 'login_user']);
+
+Route::group([
+    'prefix' => 'auth'
+], function(){
+    Route::post('/login', [UserApiController::class, 'login']);
+    Route::post('/signup', [UserApiController::class, 'signup']);
+
+    Route::group([
+        'middleware' => 'auth:api'
+    ], function(){
+        Route::get('/logout', [UserApiController::class, 'logout']);
+        Route::get('/user', [UserApiController::class, 'user']);
+
+    });
+});
 

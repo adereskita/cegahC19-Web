@@ -8,6 +8,10 @@ use App\Models\userCovid;
 use Illuminate\Http\Request;
 use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\Province;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash; 
+
 
 class PostApiController extends Controller
 {
@@ -53,23 +57,6 @@ class PostApiController extends Controller
         return response()->json([
             'status' => 'data berhasil diubah.',
             'data' => $post
-        ]);
-    }
-
-    public function users()
-    {
-        $users = User::all();
-        return response()->json([
-            'status' => 'oke',
-            'data' => $users
-        ]);
-    }
-    public function covData()
-    {
-        $covData = userCovid::all();
-        return response()->json([
-            'status' => 'oke',
-            'data' => $covData
         ]);
     }
 
