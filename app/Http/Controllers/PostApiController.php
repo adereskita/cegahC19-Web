@@ -23,12 +23,13 @@ class PostApiController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
+        $id = $request->id;
         $post = Post::find($id);
         return response()->json([
             'status' => 'oke',
-            'data' => $post
+            'data' => [$post]
         ]);
     }
 

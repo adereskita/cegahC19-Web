@@ -15,6 +15,7 @@ class UserApiController extends Controller
 {
     public function signup(Request $request){
         $request->validate([
+            'nik'=>'required|unique:users',
             'name'=>'required',
             'email'=>'required|string|unique:users',
             'password'=>'required'
@@ -22,6 +23,7 @@ class UserApiController extends Controller
         ]);
 
         $user = new User([
+            'nik'=>$request->nik,
             'name'=> $request->name,
             'email'=>$request->email,
             'password'=> Hash::make($request->password)
@@ -76,31 +78,6 @@ class UserApiController extends Controller
         ]);
     }
 
-
-    
-
-    public function login_user(Request $request)
-    {
-
-        $user = User::where('email',$request->email)->first();
-
-        if ($user) {
-            if (password_verify($request->password, $user->password)) {
-                return response()->json([
-                    'success' => '0',
-                    'data' => $user
-                ]);
-            }
-
-            return response()->json([
-                'success' => '1',
-                'message' => 'Password Salah.'
-            ]);
-        } else {
-            return $this->error('Email tidak ada.');
-        }
-    }
-
     public function error($message){
         return response()->json([
             'success' => '0',
@@ -126,5 +103,30 @@ class UserApiController extends Controller
             'status' => 'oke',
             'data' => $covData
         ]);
+    }
+
+
+
+    //NOT USED ON API just for reference
+    public function login_user(Request $request)
+    {
+
+        $user = User::where('email',$request->email)->first();
+
+        if ($user) {
+            if (password_verify($request->password, $user->password)) {
+                return response()->json([
+                    'success' => '0',
+                    'data' => $user
+                ]);
+            }
+
+            return response()->json([
+                'success' => '1',
+                'message' => 'Password Salah.'
+            ]);
+        } else {
+            return $this->error('Email tidak ada.');
+        }
     }
 }

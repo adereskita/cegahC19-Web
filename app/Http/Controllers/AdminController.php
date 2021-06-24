@@ -27,6 +27,7 @@ class AdminController extends Controller
         $password = $req->input('password');
 
         $data = Admin::where('email',$email)->first();
+        // return dd(Hash::make($password));
         if($data != null){ //apakah email tersebut ada atau tidak
             if(Hash::check($password,$data->password)){
                 Session::put('name',$data->name);
