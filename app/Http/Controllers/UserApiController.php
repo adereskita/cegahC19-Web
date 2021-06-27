@@ -109,7 +109,7 @@ class UserApiController extends Controller
             'gejala'=> 'required'
         ]);
 
-        $user = new User([
+        $userCov = new userCovid([
             'id_user'=> $request->id_user,
             'nama'=> $request->name,
             'umur'=> $request->umur,
@@ -122,10 +122,10 @@ class UserApiController extends Controller
             'gejala'=> $request->gejala
         ]);
 
-        $user->save();
+        $userCov->save();
 
         return response()->json([
-            'message' => 'User Berhasil ditambahkan.'
+            'message' => 'Data Gejala Berhasil ditambahkan.'
         ],201);
     }
 
