@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Steps;
 use App\Models\User;
 use App\Models\userCovid;
 use Illuminate\Http\Request;
@@ -133,7 +134,7 @@ class UserApiController extends Controller
     {
         $id = $request->id;
         // $covData = userCovid::all();
-        $covData = userCovid::where('id_user', $id);
+        $covData = userCovid::where('id_user', $id)->get();
         return response()->json([
             'status' => 'oke',
             'data' => $covData
@@ -147,6 +148,56 @@ class UserApiController extends Controller
         return response()->json([
             'status' => 'oke',
             'data' => $covData
+        ]);
+    }
+
+    public function insertStep(Request $request)
+    {
+        $request->validate([
+            'id_user'=>'required',
+            'date'=>'required',
+            'step'=>'required'
+
+        ]);
+
+        $userStep = new Steps([
+            'id_user'=> $request->id_user,
+            'date'=> $request->date,
+            'step'=> $request->step
+        ]);
+
+        $userStep->save();
+
+        return response()->json([
+            'message' => 'Data Step Berhasil ditambahkan.'
+        ],201);
+    }
+
+    public function getStep(Request $request)
+    {
+        $id = $request->id_user;
+        // $id = 8;
+        $stepData = Steps::where('id_user', $id)->get();
+        // $stepData = Steps::all();
+        return response()->json([
+            'status' => 'oke',
+            'data' => $stepData
+        ]);
+    }
+
+    public function getStepDate(Request $request)
+    {
+        $id = $request->id_user;
+        $date = $request->date;
+        // $id = 8;
+        $stepData = Steps::where([
+            'id_user' => $id,
+            'date' => $date
+            ])->get();
+        // $stepData = Steps::all();
+        return response()->json([
+            'status' => 'oke',
+            'data' => $stepData
         ]);
     }
 

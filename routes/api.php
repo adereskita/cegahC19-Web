@@ -34,6 +34,12 @@ Route::get('/covids', [UserApiController::class, 'covData']);
 
 Route::get('/input/covid', [UserApiController::class, 'inputCovData']);
 Route::get('/user/covid', [UserApiController::class, 'getCovDataUser']);
+
+Route::post('/post/step', [UserApiController::class, 'insertStep']);
+// Route::get('/get/step', [UserApiController::class, 'getStep']);
+Route::get('/get/step', [UserApiController::class, 'getStepDate']);
+
+
 // Route::post('/login', [PostApiController::class, 'login_user']);
 
 Route::group([

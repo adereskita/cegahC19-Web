@@ -9,6 +9,8 @@ class Steps extends Model
 {
     use HasFactory;
 
+    // protected $table = 'steps';
+
     protected $fillable = [
         'id_user',
         'date',
