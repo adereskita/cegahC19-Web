@@ -95,6 +95,51 @@ class UserApiController extends Controller
         ]);
     }
 
+    public function inputCovData(Request $request){
+        $request->validate([
+            'id_user'=> 'required',
+            'nama'=> 'required',
+            'umur'=> 'required',
+            'gender'=> 'required',
+            'nik'=> 'required|unique:users',
+            'telepon'=> 'required',
+            'provinsi'=> 'required',
+            'kota'=> 'required',
+            'alamat'=> 'required',
+            'gejala'=> 'required'
+        ]);
+
+        $user = new User([
+            'id_user'=> $request->id_user,
+            'nama'=> $request->name,
+            'umur'=> $request->umur,
+            'gender'=> $request->gender,
+            'nik'=> $request->nik,
+            'telepon'=> $request->telpon,
+            'provinsi'=> $request->provinsi,
+            'kota'=> $request->kota,
+            'alamat'=> $request->alamat,
+            'gejala'=> $request->gejala
+        ]);
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'User Berhasil ditambahkan.'
+        ],201);
+    }
+
+    public function getCovDataUser(Request $request)
+    {
+        $id = $request->id;
+        // $covData = userCovid::all();
+        $covData = userCovid::where('id_user', $id);
+        return response()->json([
+            'status' => 'oke',
+            'data' => $covData
+        ]);
+    }
+
 
     public function covData()
     {

@@ -31,6 +31,9 @@ Route::get('/city', [PostApiController::class, 'cities']);
 
 Route::get('/users', [UserApiController::class, 'users']);
 Route::get('/covids', [UserApiController::class, 'covData']);
+
+Route::get('/input/covid', [UserApiController::class, 'inputCovData']);
+Route::get('/user/covid', [UserApiController::class, 'getCovDataUser']);
 // Route::post('/login', [PostApiController::class, 'login_user']);
 
 Route::group([
