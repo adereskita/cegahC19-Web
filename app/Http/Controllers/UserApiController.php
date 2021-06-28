@@ -132,7 +132,7 @@ class UserApiController extends Controller
 
     public function getCovDataUser(Request $request)
     {
-        $id = $request->id;
+        $id = $request->id_user;
         // $covData = userCovid::all();
         $covData = userCovid::where('id_user', $id)->get();
         return response()->json([
