@@ -102,23 +102,22 @@ class UserApiController extends Controller
             'nama'=> 'required',
             'umur'=> 'required',
             'gender'=> 'required',
-            'nik'=> 'required|unique:users',
+            'nik'=> 'required',
             'telepon'=> 'required',
             'provinsi'=> 'required',
-            'kota'=> 'required',
             'alamat'=> 'required',
             'gejala'=> 'required'
         ]);
 
         $userCov = new userCovid([
             'id_user'=> $request->id_user,
-            'nama'=> $request->name,
+            'nama'=> $request->nama,
             'umur'=> $request->umur,
             'gender'=> $request->gender,
             'nik'=> $request->nik,
-            'telepon'=> $request->telpon,
+            'telepon'=> $request->telepon,
             'provinsi'=> $request->provinsi,
-            'kota'=> $request->kota,
+            'kota'=> "",
             'alamat'=> $request->alamat,
             'gejala'=> $request->gejala
         ]);
