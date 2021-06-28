@@ -32,7 +32,7 @@ Route::get('/city', [PostApiController::class, 'cities']);
 Route::get('/users', [UserApiController::class, 'users']);
 Route::get('/covids', [UserApiController::class, 'covData']);
 
-Route::get('/input/covid', [UserApiController::class, 'inputCovData']);
+Route::post('/input/covid', [UserApiController::class, 'inputCovData']);
 Route::get('/user/covid', [UserApiController::class, 'getCovDataUser']);
 Route::get('/delete/covid', [UserApiController::class, 'deleteCovDataUser']);
 
