@@ -34,6 +34,7 @@ Route::get('/covids', [UserApiController::class, 'covData']);
 
 Route::get('/input/covid', [UserApiController::class, 'inputCovData']);
 Route::get('/user/covid', [UserApiController::class, 'getCovDataUser']);
+Route::get('/delete/covid', [UserApiController::class, 'deleteCovDataUser']);
 
 Route::post('/post/step', [UserApiController::class, 'insertStep']);
 // Route::get('/get/step', [UserApiController::class, 'getStep']);

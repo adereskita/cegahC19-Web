@@ -69,12 +69,12 @@ class PostApiController extends Controller
             'data' => $province
         ]);
     }
-    public function cities()
+    public function cities(Request $request)
     {
-        $city = City::all();
+        $cities = City::where('province_id', $request->id)->pluck('name', 'id');
         return response()->json([
             'status' => 'oke',
-            'data' => $city
+            'data' => $cities
         ]);
     }
 }
