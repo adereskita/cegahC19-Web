@@ -143,7 +143,7 @@ class UserApiController extends Controller
 
     public function deleteCovDataUser(Request $request)
     {
-        $id = $request->id_user;
+        $id = $request->id;
         // $covData = userCovid::all();
         $covData = userCovid::where('id_user', $id)->delete();
         return response()->json([
