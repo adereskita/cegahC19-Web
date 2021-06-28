@@ -145,7 +145,7 @@ class UserApiController extends Controller
     {
         $id = $request->id;
         // $covData = userCovid::all();
-        $covData = userCovid::where('id_user', $id)->delete();
+        $covData = userCovid::where('id', $id)->delete();
         return response()->json([
             'message' => 'Data Gejala Berhasil diHapus.'
         ],201);
